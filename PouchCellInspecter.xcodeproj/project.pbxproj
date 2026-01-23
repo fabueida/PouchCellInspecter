@@ -11,6 +11,8 @@
 		880BCC502EEDF9F900089BB3 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880BCC4F2EEDF9F900089BB3 /* AppTheme.swift */; };
 		882919952EECB76F0050C8A8 /* CameraPermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882919942EECB76F0050C8A8 /* CameraPermissionManager.swift */; };
 		883754502F16E74A00021F8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 883754402F16E74A00021F8D /* Assets.xcassets */; };
+		8846F77D2F2407BA0011F803 /* SpeechManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8846F77C2F2407BA0011F803 /* SpeechManager.swift */; };
+		8846F77F2F2407F00011F803 /* SpeechSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8846F77E2F2407F00011F803 /* SpeechSettings.swift */; };
 		886540D12EE681A70010D08D /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886540D02EE681A70010D08D /* OnboardingView.swift */; };
 		888364702F200CAA00CB5773 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8883646F2F200CAA00CB5773 /* MenuView.swift */; };
 		DC34875A2EF1F5750006D3AE /* AllViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3487512EF1F5750006D3AE /* AllViews.swift */; };
@@ -31,6 +33,8 @@
 		880BCC4F2EEDF9F900089BB3 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		882919942EECB76F0050C8A8 /* CameraPermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPermissionManager.swift; sourceTree = "<group>"; };
 		883754402F16E74A00021F8D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8846F77C2F2407BA0011F803 /* SpeechManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechManager.swift; sourceTree = "<group>"; };
+		8846F77E2F2407F00011F803 /* SpeechSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSettings.swift; sourceTree = "<group>"; };
 		886540D02EE681A70010D08D /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		8883646F2F200CAA00CB5773 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		888AF1352ED64B9500EB16CC /* PouchCellInspecter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PouchCellInspecter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				8883646F2F200CAA00CB5773 /* MenuView.swift */,
+				8846F77C2F2407BA0011F803 /* SpeechManager.swift */,
+				8846F77E2F2407F00011F803 /* SpeechSettings.swift */,
 				DC3487512EF1F5750006D3AE /* AllViews.swift */,
 				886540D02EE681A70010D08D /* OnboardingView.swift */,
 				8806F3B82EE0B0B50082B105 /* CameraView.swift */,
@@ -228,6 +234,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				880BCC502EEDF9F900089BB3 /* AppTheme.swift in Sources */,
+				8846F77D2F2407BA0011F803 /* SpeechManager.swift in Sources */,
+				8846F77F2F2407F00011F803 /* SpeechSettings.swift in Sources */,
 				888364702F200CAA00CB5773 /* MenuView.swift in Sources */,
 				882919952EECB76F0050C8A8 /* CameraPermissionManager.swift in Sources */,
 				DC34875A2EF1F5750006D3AE /* AllViews.swift in Sources */,
@@ -381,7 +389,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 748PM6VCVK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -396,7 +404,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = oqubak.PouchCellInspecter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -415,7 +423,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 748PM6VCVK;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -430,7 +438,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = oqubak.PouchCellInspecter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;

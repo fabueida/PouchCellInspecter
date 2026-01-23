@@ -2,8 +2,21 @@ import SwiftUI
 import Combine
 import PhotosUI
 
+// MARK: - Speech Settings Persistence (same key as MenuView)
+private enum SpeechSettingsStorage {
+    static let key = "speechSettingsData"
+
+    static func encode(_ settings: SpeechSettings) -> Data {
+        (try? JSONEncoder().encode(settings)) ?? Data()
+    }
+
+    static func decode(_ data: Data) -> SpeechSettings {
+        (try? JSONDecoder().decode(SpeechSettings.self, from: data)) ?? .default
+    }
+}
+
 struct HomeScreen: View {
-    
+
     @StateObject private var cameraManager = CameraPermissionManager()
 
     // MARK: - Menu
@@ -23,6 +36,13 @@ struct HomeScreen: View {
 
     private let classifier = ImageClassifier()
 
+    // ✅ Load speech settings app-wide
+    @AppStorage(SpeechSettingsStorage.key) private var speechSettingsData: Data = SpeechSettingsStorage.encode(.default)
+
+    private var speechSettings: SpeechSettings {
+        SpeechSettingsStorage.decode(speechSettingsData)
+    }
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -30,8 +50,6 @@ struct HomeScreen: View {
                     .ignoresSafeArea()
 
                 VStack(spacing: 36) {
-
-                    //Spacer()
 
                     Text("PouchCell Inspector")
                         .font(.system(size: 32, weight: .bold))
@@ -43,16 +61,14 @@ struct HomeScreen: View {
                         cameraManager.requestPermission()
                     } label: {
                         Label("Scan", systemImage: "camera.fill")
-                                                        .font(.system(size: 20, weight: .semibold))
+                            .font(.system(size: 20, weight: .semibold))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 20)
                             .background(AppTheme.accent)
                             .cornerRadius(18)
                             .accessibilityHint("Double tap to take a picture of your Lithium battery.")
-
-                                                }
-                    
+                    }
                     .padding(.horizontal, 32)
 
                     // MARK: - Secondary Action
@@ -111,9 +127,7 @@ struct HomeScreen: View {
         }
         // MARK: - Camera Permission Handling
         .onChange(of: cameraManager.permissionGranted) { _, granted in
-            if granted {
-                showCamera = true
-            }
+            if granted { showCamera = true }
         }
         // MARK: - Camera
         .sheet(isPresented: $showCamera) {
@@ -138,9 +152,7 @@ struct HomeScreen: View {
                 .navigationTitle("Import Photo")
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
-                        Button("Close") {
-                            showPhotoPicker = false
-                        }
+                        Button("Close") { showPhotoPicker = false }
                     }
                 }
             }
@@ -188,9 +200,29 @@ struct HomeScreen: View {
 
             DispatchQueue.main.async {
                 showLoading = false
-                prediction = result ?? "Unable to analyze image"
+
+                let label = result ?? "Unable to analyze image"
+                prediction = label
                 showResult = true
+
+                // ✅ Self-voicing result (separate from VoiceOver)
+                let speakText = speechText(for: label)
+                SpeechManager.shared.speak(speakText, settings: speechSettings)
             }
+        }
+    }
+
+    // MARK: - Speakable Result Copy
+    private func speechText(for label: String) -> String {
+        switch label.lowercased() {
+        case "normal":
+            return "Result: normal. No visible bulging detected."
+        case "bulging":
+            return "Result: bulging detected. Please handle the battery with caution."
+        case "unable to analyze image":
+            return "Result unavailable. The image could not be analyzed."
+        default:
+            return "Result: \(label)."
         }
     }
 }
