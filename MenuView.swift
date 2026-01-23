@@ -95,8 +95,7 @@ struct MenuView: View {
                                 speechSettingsData = SpeechSettingsStorage.encode(s)
 
                                 if !newValue {
-                                    // Stop any ongoing speech immediately when user turns it off
-                                    SpeechManager.shared.stop()
+                                                                        SpeechManager.shared.stop()
                                 }
                             }
                         )
@@ -123,8 +122,7 @@ struct MenuView: View {
                                 )
                             }
 
-                            // Pitch (optional but you asked for it)
-                            VStack(alignment: .leading, spacing: 6) {
+                                                        VStack(alignment: .leading, spacing: 6) {
                                 Text("Pitch")
                                     .font(.subheadline)
                                     .foregroundStyle(.secondary)
