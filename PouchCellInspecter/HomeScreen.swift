@@ -1,3 +1,10 @@
+//
+//  ImageClassifier.swift
+//  placeholder
+//
+//  Created by Firas Abueida on 11/26/25.
+//
+
 import SwiftUI
 import Combine
 import PhotosUI
@@ -56,8 +63,7 @@ struct HomeScreen: View {
 
                     Spacer()
 
-                    // MARK: - Primary Action
-                    Button {
+                                        Button {
                         cameraManager.requestPermission()
                     } label: {
                         Label("Scan", systemImage: "camera.fill")
