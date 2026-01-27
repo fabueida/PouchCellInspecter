@@ -1,181 +1,227 @@
+⸻
 
-Pouch Cell Inspector is an iOS application designed to detect bulging lithium‑ion pouch cells using machine‑learning–based computer vision. Built primarily in Swift and powered by CoreML, the app provides a fast, accessible, and reliable way to assess battery safety using only an iPhone camera.
+🔋 Pouch Cell Inspector
 
-This tool supports technicians, engineers, researchers, and everyday users by offering real‑time classification, image preprocessing, result history, and optional reporting features. The app is also intentionally designed with accessibility and low‑vision users in mind, incorporating large text, high‑contrast UI, VoiceOver compatibility, and guided capture instructions to ensure safe and inclusive use.
+Pouch Cell Inspector is a cutting edge iOS application that uses machine-learning–powered computer vision to detect bulging lithium-ion pouch cells using only an iPhone camera.
 
-Whether you’re inspecting EV battery cells in a lab or checking pouch cells in a consumer device, Pouch Cell Inspector delivers a streamlined, accurate, and user‑friendly inspection workflow.
+Built with Swift, SwiftUI, Vision, and CoreML, the app delivers a fast, reliable, and fully on-device battery safety inspection tool designed for:
+	•	🔧 Technicians
+	•	🧪 Engineers & researchers
+	•	🏭 Lab and industrial environments
+	•	📱 Field inspections
 
----
+The system emphasizes accuracy, accessibility, privacy, and real-world usability, enabling safe and consistent inspections without specialized hardware.
 
-Features
+⸻
 
-• Real‑Time Bulging Detection
-Uses a trained CoreML model to classify pouch cells as Normal or Bulging within seconds.
-• Camera Capture & Photo Library Import
-Take a live photo using the iPhone camera or import an existing image from the photo library for analysis.
-• Advanced Image Preprocessing
-Automatically adjusts lighting, normalizes input, and resizes images to ensure consistent model performance across environments.
-• Accessible for Low‑Vision & Blind Users
-Designed following Apple’s Human Interface Guidelines:• VoiceOver support
-• Large, readable text
-• High‑contrast UI
-• Clear audio and haptic feedback
-• Guided capture instructions for users who cannot visually align the camera
+🎯 Project Purpose
 
-• Result Display & Confidence Scores
-Shows classification results with confidence percentages, timestamps, and optional notes.
-• Report Generation
-Export results as structured reports (PDF/JSON) for documentation, audits, or lab use.
-• Local History Tracking
-Automatically saves past classifications with thumbnails and metadata for later review.
-• Offline Functionality
-All processing is done on‑device — no internet required, ensuring privacy and security.
+Lithium-ion pouch cells may bulge due to gas buildup, aging, overcharging, or internal failure. Swelling is an early warning sign of potential battery hazards.
 
+Pouch Cell Inspector was developed to:
+	•	Provide rapid visual safety checks
+	•	Reduce reliance on subjective manual inspection
+	•	Deliver consistent ML-based classification
+	•	Support documentation and traceability
+	•	Enable accessible inspection workflows
+	•	Operate fully offline for data privacy
 
----
+This project is grounded in research on mobile computer vision for battery safety and aims to support real-world industrial and laboratory applications.
 
-Getting Started
+⸻
 
-Follow these steps to clone, build, and run the app in development mode.
+✨ Features
 
----
+🔍 Real-Time Bulging Detection
 
-1. Clone the Repository
+A trained CoreML model classifies pouch cells as:
+	•	Normal
+	•	Bulging
+
+Results are returned in seconds with confidence scores.
+
+⸻
+
+📷 Flexible Image Sources
+
+Users can inspect cells using:
+	•	Live camera capture
+	•	Photo Library import
+
+This allows:
+	•	Field use in varied environments
+	•	Reviewing previously captured images
+	•	Safer analysis when live alignment is difficult
+
+⸻
+
+🧠 Intelligent Image Preprocessing
+
+The app automatically:
+	•	Normalizes lighting
+	•	Resizes inputs to match model expectations
+	•	Adjusts exposure
+	•	Improves consistency across environments
+
+⸻
+
+📊 Results & Confidence Metrics
+
+Each inspection includes:
+	•	Classification result
+	•	Confidence percentage
+	•	Timestamp
+	•	Optional notes
+
+⸻
+
+🗂 Local Inspection History
+	•	Past inspections are saved automatically
+	•	Includes thumbnails and metadata
+	•	Enables traceability and later review
+
+⸻
+
+📄 Report Generation
+
+Export structured reports (PDF/JSON) for:
+	•	Lab documentation
+	•	Safety audits
+	•	Research records
+
+⸻
+
+🔒 Fully Offline Processing
+
+All ML inference happens on-device:
+	•	No internet required
+	•	No images uploaded
+	•	Preserves privacy and industrial data security
+
+⸻
+
+♿ Accessibility & Speech Support
+
+Pouch Cell Inspector is designed for visually impaired, low-vision, and motor-impaired users.
+
+Accessibility features include:
+	•	VoiceOver-friendly interface
+	•	Large, scalable text
+	•	High-contrast UI
+	•	Speech feedback for classification results
+	•	Audio + haptic confirmation cues
+	•	Guided capture instructions
+	•	Screen-reader-friendly error messages
+
+These features ensure the inspection workflow remains usable in industrial, lab, and consumer environments, regardless of visual ability.
+
+⸻
+
+🛠 Built With
+	•	Swift
+	•	SwiftUI
+	•	CoreML
+	•	Vision Framework
+	•	AVFoundation
+	•	Apple Human Interface Guidelines (HIG)
+
+⸻
+
+🚀 Getting Started
+
+1️⃣ Clone the Repository
 
 git clone https://github.com/<your-org>/Pouch-Cell-Inspector.git
 cd Pouch-Cell-Inspector
 
 
----
+⸻
 
-2. iOS App Setup (Xcode)
+2️⃣ Requirements
+	•	macOS
+	•	Xcode 15+
+	•	iOS 14+ device or simulator
+	•	Apple Developer account (for physical device testing)
 
-Requirements
+⸻
 
-• macOS with Xcode installed
-• iPhone running iOS 14+
-• Apple Developer account (for device deployment)
-• CoreML‑compatible device (all modern iPhones)
-
-
-Open the Project
+3️⃣ Open in Xcode
 
 open PouchCellInspector.xcodeproj
 
+All dependencies are native to iOS — no external packages required.
 
-Install Dependencies
+⸻
 
-The project uses:
+4️⃣ Run the App
+	1.	Select a simulator or physical device
+	2.	Press Run (⌘R)
 
-• SwiftUI
-• CoreML
-• Vision
-• AVFoundation
+For physical devices:
+	•	Enable Developer Mode
+	•	Trust the developer certificate
 
+⸻
 
-All dependencies are native to iOS — no external package installation required.
+🤖 Machine Learning Model
 
-Run on Simulator or Device
+The project includes:
+	•	A trained CoreML classification model
+	•	Image preprocessing pipeline
+	•	Evaluation metrics (accuracy, precision, recall)
 
-1. Select a target device in Xcode.
-2. Press Run or use:cmd + r
+To replace the model:
+	1.	Export a new .mlmodel file
+	2.	Place it in:
 
+PouchCellInspector/Model/
 
+	3.	Rebuild the project
 
-To run on a physical iPhone:
+⸻
 
-• Connect your device
-• Trust the developer certificate
-• Enable Developer Mode under Settings → Privacy & Security
+📚 Engineering & Research Documentation
 
+This project follows structured software engineering and research practices, including:
+	•	Software Quality Assurance planning (testing strategy, reviews, defect tracking)
+	•	Software Project Planning (resources, risks, workflow)
+	•	Research-driven ML methodology for battery safety detection
 
----
+These practices ensure the system is built with a focus on reliability, safety, and real-world deployment readiness.
 
-3. Machine Learning Model Setup
+⸻
 
-The app includes:
+🧪 Testing
+	•	Unit tests
+	•	Integration tests
+	•	System tests
+	•	ML evaluation tests
+	•	Accessibility validation
 
-• A CoreML model trained on labeled pouch cell images
-• Preprocessing pipeline for lighting and normalization
-• Evaluation metrics (accuracy, precision, recall)
+⸻
 
+🔮 Future Enhancements
+	•	Cloud syncing for lab environments
+	•	Multi-cell batch scanning
+	•	Severity grading (beyond binary classification)
+	•	Thermal + vision sensor fusion
 
-If you retrain or replace the model:
+⸻
 
-1. Export the .mlmodel file
-2. Place it in:PouchCellInspector/Model/
+🚧 Project Status
 
-3. Rebuild the project
+Active development — features, UI, and model performance continue to improve.
 
+⸻
 
----
+💡 Impact
 
-4. Optional: Report Syncing / Cloud Storage
+Pouch Cell Inspector supports early detection of battery deformation, helping:
+	•	Improve operational safety
+	•	Reduce inspection subjectivity
+	•	Support research and diagnostics
+	•	Enable accessible industrial software
 
-If your team enables cloud syncing in the future:
+⸻
 
-• Add your cloud configuration files (Firebase, AWS, etc.)
-• Do not commit these files to the repository
-• Update environment variables accordingly
-
-
----
-
-Environment Variables (Optional)
-
-If cloud features are enabled, create a .env file:
-
-CLOUD_API_KEY=your_key_here
-MODEL_VERSION=1.0
-
-
----
-
-Development Notes
-
-• The app follows the SQA, RMMM, and Project Plan guidelines from your documentation.
-• All changes must go through GitHub pull requests with code reviews.
-• Testing includes unit tests, integration tests, and ML evaluation tests.
-• Accessibility testing is required for all UI updates.
-
-
----
-
-Accessibility Commitment
-
-Pouch Cell Inspector is intentionally designed for:
-
-• Blind users
-• Low‑vision users
-• Users with motor impairments
-• Users who rely on audio or haptic feedback
-
-
-Accessibility features include:
-
-• VoiceOver‑friendly UI
-• Large, scalable text
-• High‑contrast color palette
-• Clear button labeling
-• Minimal visual clutter
-• Haptic confirmation for capture and classification
-• Error messages that are screen‑reader friendly
-
-
-This ensures the app can be safely used in industrial, laboratory, and consumer environments.
-
----
-
-Enjoy safer battery inspections with Pouch Cell Inspector!
-
-Built for reliability, accessibility, and real‑world performance.
-
-If you’d like, I can also generate:
-
-• A shorter README
-• A version with images or badges
-• A version formatted for App Store submission
-• A version with installation GIFs or screenshots
-
-
-Just tell me what direction you want to take it.
+Built for safety, accessibility, and real-world performance.
