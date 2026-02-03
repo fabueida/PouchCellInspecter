@@ -6,21 +6,21 @@
 //
 import UIKit
 import CoreGraphics
-import CoreML
 
 enum ImagePreprocessing {
-
-    static func imageToGrayscaleVector(_ image: UIImage, size: Int = 128) -> [Double]? {
+    static func imageToGrayscaleVector (_ image: UIImage, size: Int = 128) -> [Double]? {
         guard let cgImage = image.cgImage else { return nil }
-
+        
         let width = size
         let height = size
         let count = width * height
-
+        
         var rawData = [UInt8](repeating: 0, count: count)
-
-        let colorSpace = CGColorSpaceCreateDeviceGray()
-
+        
+        guard let colorSpace = CGColorSpace(name: CGColorSpace.linearGray) ?? CGColorSpaceCreateDeviceGray() as CGColorSpace? else {
+            return nil
+        }
+        
         guard let context = CGContext(
             data: &rawData,
             width: width,
@@ -29,15 +29,18 @@ enum ImagePreprocessing {
             bytesPerRow: width,
             space: colorSpace,
             bitmapInfo: CGImageAlphaInfo.none.rawValue
-        ) else { return nil }
-
+        ) else {
+            return nil
+        }
+        
         context.interpolationQuality = .high
-        context.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
-
+        
+        context.draw(cgImage, in: CGRect(x: 0, y:0, width: width, height: height))
+        
         return rawData.map { Double($0) / 255.0 }
     }
 
-    // NEW: [Double] -> MLMultiArray(Double, 16384)
+     // NEW: [Double] -> MLMultiArray(Double, 16384)
     static func vectorToMultiArray(_ v: [Double]) -> MLMultiArray? {
         guard v.count == 128 * 128 else { return nil } // adjust if different
         guard let arr = try? MLMultiArray(shape: [NSNumber(value: v.count)], dataType: .double) else { return nil }

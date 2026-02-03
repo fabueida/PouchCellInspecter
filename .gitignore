@@ -1,0 +1,11 @@
+cat >> .gitignore <<'EOF'
+# macOS
+.DS_Store
+
+# Xcode user-specific
+xcuserdata/
+*.xcuserstate
+
+# JetBrains / IntelliJ
+.idea/
+EOF

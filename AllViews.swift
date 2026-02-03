@@ -2,7 +2,7 @@
 //  All.swift
 //  PouchCellInspecter
 //
-//  Created by Oquba Khan on 12/16/25.
+//  Created by Firas Abueida on 12/16/25.
 //
 import SwiftUI
 struct Intro: View {
