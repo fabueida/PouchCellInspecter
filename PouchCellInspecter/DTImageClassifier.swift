@@ -10,13 +10,17 @@ import Vision
 import UIKit
 
 struct PredictionResult {
-    let classLabel: Int
+    let classLabel: String
     let probabilities: [Int: Double]
     let topK: [(label: Int, prob: Double)]
 }
 
 final class DTImageClassifier {
     private let model: DTClassifier
+    private let classNames = [
+        0: "Normal",
+        1: "Bulging"
+    ]
     
     init() {
         let config = MLModelConfiguration()
@@ -24,7 +28,7 @@ final class DTImageClassifier {
         self.model = try! DTClassifier(configuration: config)
     }
     
-    func classify(image: UIImage) throws -> PredictionResult {
+    func classify(_ image: UIImage) throws -> PredictionResult {
         guard let inputArray = ImagePreprocessing.imageToGrayscaleMultiArray(image) else {
             throw NSError(
                 domain: "DTImageClassifier",
@@ -34,7 +38,9 @@ final class DTImageClassifier {
         }
         let out = try model.prediction(input: inputArray)
         
-        let label = Int(out.classLabel)
+        let labelRaw = Int(out.classLabel)
+        
+        let label = classNames[labelRaw]
         
         var probs: [Int: Double] = [:]
         

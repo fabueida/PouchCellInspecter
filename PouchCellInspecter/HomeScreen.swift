@@ -41,7 +41,9 @@ struct HomeScreen: View {
     @State private var showLoading = false
     @State private var showResult = false
 
-    private let classifier = ImageClassifier()
+//    private let classifier = ImageClassifier()
+    private let classifier = DTImageClassifier()
+    
 
     // ✅ Load speech settings app-wide
     @AppStorage(SpeechSettingsStorage.key) private var speechSettingsData: Data = SpeechSettingsStorage.encode(.default)
@@ -201,18 +203,38 @@ struct HomeScreen: View {
 
         showLoading = true
 
+        // for SVM
+//        DispatchQueue.global(qos: .userInitiated).async {
+//            let result = classifier.classify(image)
+//
+//            DispatchQueue.main.async {
+//                showLoading = false
+//
+//                let label = result ?? "Unable to analyze image"
+//                prediction = label
+//                showResult = true
+//
+//                // ✅ Self-voicing result (separate from VoiceOver)
+//                let speakText = speechText(for: label)
+//                SpeechManager.shared.speak(speakText, settings: speechSettings)
+//            }
+//        }
+        // for DT
         DispatchQueue.global(qos: .userInitiated).async {
-            let result = classifier.classify(image)
-
+            let result = try? classifier.classify(image)
+            
             DispatchQueue.main.async {
                 showLoading = false
-
-                let label = result ?? "Unable to analyze image"
-                prediction = label
+                
+                //                let label = result ?? "Unable to analyze image"
+                let label = result?.classLabel
+                let labelIndex = result!.classLabel == "Normal" ? 0 : 1
+                let confidence = result!.probabilities[labelIndex] ?? 0.0
+                prediction = "\(label) – \(String(format: "%.1f%%", confidence * 100))"
                 showResult = true
-
+                
                 // ✅ Self-voicing result (separate from VoiceOver)
-                let speakText = speechText(for: label)
+                let speakText = speechText(for: label!)
                 SpeechManager.shared.speak(speakText, settings: speechSettings)
             }
         }
